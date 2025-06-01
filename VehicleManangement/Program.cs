@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using VehicleManangement.Data;
+using VehicleManangement.Models;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<VehicleManangementContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("VehicleManangementContext") ?? throw new InvalidOperationException("Connection string 'VehicleManangementContext' not found.")));
@@ -9,6 +10,12 @@ builder.Services.AddDbContext<VehicleManangementContext>(options =>
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    Seed.Initialize(services);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
