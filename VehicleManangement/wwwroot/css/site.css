@@ -1,0 +1,156 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    color: white;
+    background: #09161c;
+}
+
+
+header .navbar {
+    background: rgba(24, 35, 41, 0.95) !important;
+    color: white;
+}
+
+.navbar-collapse {
+    height: 75px !important;
+}
+
+.navbar-nav {
+    height: 100% !important;
+    align-items: center;
+}
+
+header .navbar .nav-item {
+    height: 100% !important;
+    display: flex;
+    align-items: center;
+}
+
+header .navbar .nav-item:hover {
+    background: #d7182a !important;
+    color: #d7182a !important;
+    height: 100% !important;
+    display: flex;
+    align-items: center;
+    border-top:solid 5px white;
+}
+
+
+
+
+body:has(div.HomeSelecter) .nav-item.HomeSelecter {
+    border-top: solid 5px #d7182a;
+    color: #d7182a !important;
+}
+body:has(div.SupplierSelecter) .nav-item.SupplierSelecter {
+    border-top: solid 5px #d7182a;
+    color: #d7182a !important;
+}
+body:has(div.CountrySelecter) .nav-item.CountrySelecter {
+    border-top: solid 5px #d7182a;
+    color: #d7182a !important;
+}
+body:has(div.AddressSelecter) .nav-item.AddressSelecter {
+    border-top: solid 5px #d7182a;
+    color: #d7182a !important;
+}
+body:has(div.PrivacySelecter) .nav-item.PrivacySelecter {
+    border-top: solid 5px #d7182a;
+    color: #d7182a !important;
+}
+body:has(div.BranchesSelecter) .nav-item.BranchesSelecter {
+    border-top: solid 5px #d7182a;
+    color: #d7182a !important;
+}
+body:has(div.VehiclesSelecter) .nav-item.VehiclesSelecter {
+    border-top: solid 5px #d7182a;
+    color: #d7182a !important;
+}
+body:has(div.ClientsSelecter) .nav-item.ClientsSelecter {
+    border-top: solid 5px #d7182a;
+    color: #d7182a !important;
+}
+body:has(div.DriversSelecter) .nav-item.DriversSelecter {
+    border-top: solid 5px #d7182a;
+    color: #d7182a !important;
+}
+
+
+
+table {
+    border: solid 1px;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+
+thead {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background: linear-gradient(0deg,rgba(77, 93, 115, 1) 0%, rgba(41, 61, 79, 1) 100%);
+}
+
+th{
+    color:white;
+}
+
+td {
+    color: black;
+    align-items: center;
+}
+
+tbody tr:nth-child(even) {
+    background: #F2FFFF;
+}
+tbody tr:nth-child(odd) {
+    background: #DFF0F0;
+}
+
+
+thead th:first-child {
+    border-top-left-radius: 15px;
+}
+
+thead th:last-child {
+    border-top-right-radius: 15px;
+}
+
+tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 15px;
+}
+
+tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 15px;
+}
+
+.flex-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.flex-grow-text {
+    flex-grow: 1;
+    text-align: left;
+}
