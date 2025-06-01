@@ -23,6 +23,16 @@ body {
     background: #09161c;
 }
 
+.backArrow {
+    position: relative;
+    left: -50px;
+}
+
+.bi.bi-arrow-left{
+    padding-right:10px;
+}
+
+
 
 header .navbar {
     background: rgba(24, 35, 41, 0.95) !important;

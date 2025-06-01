@@ -5,7 +5,7 @@
     var vehicles = ViewData["Vehicles"] as List<VehicleManangement.Models.VehicleReportView>;
 }
 
-<h1>Details</h1>
+<h1 class="backArrow"><a asp-action="Index"><i class="bi bi-arrow-left text-white"></i></a>Details</h1>
 <div class="ClientsSelecter"></div>
 <div>
     <h4>Client</h4>
@@ -57,7 +57,8 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id"><button type="button" class="btn btn-primary"><i class="bi bi-pencil-square" data-bs-toggle="tooltip" title="Edit this item">Edit</i></button></a> |
-    <a asp-action="Index"><button type="button" class="btn btn-warning">Back to List</button></a>
+    <a asp-action="Index"><button type="button" class="btn btn-warning">Back to List</button></a> |
+    <a asp-controller="Vehicles" asp-action="IndexByClients" asp-route-clientId=@Model.Id><button type="button" class="btn btn-primary">Manage Leased Vehicles</button></a>
 </div>
 <br />
 

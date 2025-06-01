@@ -44,10 +44,15 @@ namespace VehicleManangement.Controllers
         }
 
         // GET: Addresses/Create
-        public IActionResult Create()
+        public IActionResult Create(string? parentLinkId)
         {
+            var model = new Address();
+            if (parentLinkId != null)
+            {
+                model.LinkedParentId = parentLinkId;
+            }
             ViewBag.CountryList = new SelectList(_context.Country, "Id", "Name");
-            return View();
+            return View(model);
         }
 
         // POST: Addresses/Create

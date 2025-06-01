@@ -4,7 +4,7 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1 class="backArrow"><a href="javascript:history.back()"><i class="bi bi-arrow-left text-white"></i></a>Edit</h1>
 <div class="VehiclesSelecter"></div>
 <h4>Vehicle</h4>
 <hr />
@@ -13,62 +13,83 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Manufacturer" class="control-label"></label>
-                <input asp-for="Manufacturer" class="form-control" />
-                <span asp-validation-for="Manufacturer" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Model" class="control-label"></label>
-                <input asp-for="Model" class="form-control" />
-                <span asp-validation-for="Model" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Year" class="control-label"></label>
-                <input asp-for="Year" class="form-control" />
-                <span asp-validation-for="Year" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RegistrationNumber" class="control-label"></label>
-                <input asp-for="RegistrationNumber" class="form-control" />
-                <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LicencePlate" class="control-label"></label>
-                <input asp-for="LicencePlate" class="form-control" />
-                <span asp-validation-for="LicencePlate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Color" class="control-label"></label>
-                <input asp-for="Color" class="form-control" />
-                <span asp-validation-for="Color" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Odometer" class="control-label"></label>
-                <input asp-for="Odometer" class="form-control" />
-                <span asp-validation-for="Odometer" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Supplier" class="control-label"></label>
-                <select asp-for="SupplierId" class="form-control" asp-items="ViewBag.SupplierId">
-                    <option value="">-- Select Supplier --</option>
+            @if (ViewBag.clientMId != null)
+            {
+                <input type="hidden" asp-for="Manufacturer" class="form-control" />
+                <input type="hidden" asp-for="Model" class="form-control" />
+                <input type="hidden" asp-for="Year" class="form-control" />
+                <input type="hidden" asp-for="RegistrationNumber" class="form-control" />
+                <input type="hidden" asp-for="LicencePlate" class="form-control" />
+                <input type="hidden" asp-for="Color" class="form-control" />
+                <input type="hidden" asp-for="Odometer" class="form-control" />
+                <select style="display:none;" asp-for="SupplierId" class="form-control" asp-items="ViewBag.SupplierId">
                 </select>
-                <span asp-validation-for="SupplierId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Branch" class="control-label"></label>
-                <select asp-for="BranchId" class="form-control" asp-items="ViewBag.BranchId">
-                    <option value="">-- Select Branch --</option>
+                <select style="display:none;" asp-for="BranchId" class="form-control" asp-items="ViewBag.BranchId">
                 </select>
-                <span asp-validation-for="BranchId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Client" class="control-label"></label>
+                <select style="display:none;" asp-for="ClientId" class="form-control" asp-items="ViewBag.ClientId">
+                </select>
+                
+            }
+            else
+            {
+
+                <div class="form-group" >
+                    <label asp-for="Manufacturer" class="control-label"></label>
+                    <input asp-for="Manufacturer" class="form-control" />
+                    <span asp-validation-for="Manufacturer" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Model" class="control-label"></label>
+                    <input asp-for="Model" class="form-control" />
+                    <span asp-validation-for="Model" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Year" class="control-label"></label>
+                    <input asp-for="Year" class="form-control" />
+                    <span asp-validation-for="Year" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RegistrationNumber" class="control-label"></label>
+                    <input asp-for="RegistrationNumber" class="form-control" />
+                    <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LicencePlate" class="control-label"></label>
+                    <input asp-for="LicencePlate" class="form-control" />
+                    <span asp-validation-for="LicencePlate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Color" class="control-label"></label>
+                    <input asp-for="Color" class="form-control" />
+                    <span asp-validation-for="Color" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Odometer" class="control-label"></label>
+                    <input asp-for="Odometer" class="form-control" />
+                    <span asp-validation-for="Odometer" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Supplier" class="control-label"></label>
+                    <select asp-for="SupplierId" class="form-control" asp-items="ViewBag.SupplierId">
+                        <option value="">-- Select Supplier --</option>
+                    </select>
+                    <span asp-validation-for="SupplierId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Branch" class="control-label"></label>
+                    <select asp-for="BranchId" class="form-control" asp-items="ViewBag.BranchId">
+                        <option value="">-- Select Branch --</option>
+                    </select>
+                    <span asp-validation-for="BranchId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Client" class="control-label"></label>
                 <select asp-for="ClientId" class="form-control" asp-items="ViewBag.ClientId">
                     <option value="">-- Select Client --</option>
                 </select>
                 <span asp-validation-for="ClientId" class="text-danger"></span>
             </div>
+            }
             <div class="form-group">
                 <label asp-for="Driver" class="control-label"></label>
                 <select asp-for="DriverId" class="form-control" asp-items="ViewBag.DriverId">
@@ -83,10 +104,12 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index"><button type="button" class="btn btn-warning">Back to List</button></a>
-</div>
-
+@if (ViewBag.clientMId == null)
+{
+    <div>
+        <a asp-action="Index"><button type="button" class="btn btn-warning">Back to List</button></a>
+    </div>
+}
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

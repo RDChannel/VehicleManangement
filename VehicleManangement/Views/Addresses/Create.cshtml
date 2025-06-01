@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1 class="backArrow"><a href="javascript:history.back()"><i class="bi bi-arrow-left text-white"></i></a>Create</h1>
 <div class="AddressSelecter"></div>
 <h4>Address</h4>
 <hr />
@@ -12,6 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="LinkedParentId" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />

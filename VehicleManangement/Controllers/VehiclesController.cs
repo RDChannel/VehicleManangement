@@ -26,6 +26,95 @@ namespace VehicleManangement.Controllers
             return View(await vehicleManangementContext.ToListAsync());
         }
 
+        public async Task<IActionResult> IndexByClients(int? clientId)
+        {
+            var vehicleManangementContext = _context.Vehicle.Include(v => v.Branch).Include(v => v.Client).Include(v => v.Driver).Include(v => v.Supplier).Where(m => m.ClientId == clientId);
+            ViewBag.clientId = clientId;
+            return View(await vehicleManangementContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> IndexLease(int? clientId)
+        {
+            var vehicleManangementContext = _context.Vehicle.Include(v => v.Branch).Include(v => v.Client).Include(v => v.Driver).Include(v => v.Supplier).Where(m => m.ClientId == null);
+            ViewBag.clientId = clientId;
+            return View(await vehicleManangementContext.ToListAsync());
+        }
+        
+        // GET: Vehicles/Details/5
+        public async Task<IActionResult> AddLease(int? id, int? clientId)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var client = await _context.Client
+                .Include(c => c.Address)
+                .FirstOrDefaultAsync(m => m.Id == clientId);
+            var vehicle = await _context.Vehicle
+                .Include(v => v.Branch)
+                .Include(v => v.Client)
+                .Include(v => v.Driver)
+                .Include(v => v.Supplier)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            try
+            {
+                vehicle.Client = client;
+                vehicle.ClientId = client.Id;
+                _context.Update(vehicle);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!VehicleExists(vehicle.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(IndexByClients), new { clientId = clientId });
+        }
+
+        // GET: Vehicles/Details/5
+        public async Task<IActionResult> RemoveLease(int? id, int? clientId = null)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var vehicle = await _context.Vehicle
+                .Include(v => v.Branch)
+                .Include(v => v.Client)
+                .Include(v => v.Driver)
+                .Include(v => v.Supplier)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            try
+                {
+                vehicle.Client = null;
+                vehicle.ClientId = null;
+                vehicle.Driver = null;
+                vehicle.DriverId = null;
+                _context.Update(vehicle);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!VehicleExists(vehicle.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(IndexByClients), new { clientId = clientId });
+        }
+
+
         // GET: Vehicles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -86,7 +175,7 @@ namespace VehicleManangement.Controllers
         }
 
         // GET: Vehicles/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id,int? clientId = null)
         {
             if (id == null)
             {
@@ -102,6 +191,7 @@ namespace VehicleManangement.Controllers
             ViewData["ClientId"] = new SelectList(_context.Client, "Id", "Name", vehicle.ClientId);
             ViewData["DriverId"] = new SelectList(_context.Driver, "Id", "Name", vehicle.DriverId);
             ViewData["SupplierId"] = new SelectList(_context.Supplier, "Id", "Name", vehicle.SupplierId);
+            ViewBag.clientMId = clientId;
             return View(vehicle);
         }
 
@@ -110,7 +200,7 @@ namespace VehicleManangement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Manufacturer,Model,Year,RegistrationNumber,LicencePlate,Color,Odometer,SupplierId,BranchId,ClientId,DriverId")] Vehicle vehicle)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Manufacturer,Model,Year,RegistrationNumber,LicencePlate,Color,Odometer,SupplierId,BranchId,ClientId,DriverId")] Vehicle vehicle, int? clientId = null)
         {
             if (id != vehicle.Id)
             {
@@ -135,12 +225,17 @@ namespace VehicleManangement.Controllers
                         throw;
                     }
                 }
+                if(clientId != null)
+                {
+                    return RedirectToAction(nameof(IndexByClients), new { clientId = clientId });
+                }
                 return RedirectToAction(nameof(Index));
             }
             ViewData["BranchId"] = new SelectList(_context.Branch, "Id", "Name", vehicle.BranchId);
             ViewData["ClientId"] = new SelectList(_context.Client, "Id", "Name", vehicle.ClientId);
             ViewData["DriverId"] = new SelectList(_context.Driver, "Id", "Name", vehicle.DriverId);
             ViewData["SupplierId"] = new SelectList(_context.Supplier, "Id", "Name", vehicle.SupplierId);
+            ViewBag.clientMId = clientId;
             return View(vehicle);
         }
 

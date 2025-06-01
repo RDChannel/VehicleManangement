@@ -12,8 +12,8 @@ using VehicleManangement.Data;
 namespace VehicleManangement.Migrations
 {
     [DbContext(typeof(VehicleManangementContext))]
-    [Migration("20250601165449_InitialCreate4")]
-    partial class InitialCreate4
+    [Migration("20250601195703_InitialCreate6")]
+    partial class InitialCreate6
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,6 +44,9 @@ namespace VehicleManangement.Migrations
 
                     b.Property<int?>("CountryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("LinkedParentId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

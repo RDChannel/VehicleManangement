@@ -1,0 +1,94 @@
+﻿@model IEnumerable<VehicleManangement.Models.Vehicle>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="backArrow"><a asp-controller="Clients" asp-action="Details" asp-route-id=@ViewBag.clientId><i class="bi bi-arrow-left text-white"></i></a>Leased Vehicles</h1>
+<div class="VehiclesSelecter"></div>
+<p>
+    <a asp-action="IndexLease" asp-route-clientId=@ViewBag.clientId><button type="button" class="btn btn-primary">Lease New Car</button></a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Manufacturer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LicencePlate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Odometer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supplier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Branch)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Driver)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Manufacturer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LicencePlate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Odometer)
+            </td>
+            <td>
+                    <a asp-controller="Suppliers" asp-action="Details" asp-route-id="@item.Supplier?.Id">@item.Supplier?.Name</a>
+            </td>
+            <td>
+                    <a asp-controller="Branches" asp-action="Details" asp-route-id="@item.Branch?.Id">@item.Branch?.Name</a>
+            </td>
+            <td>
+                    <a asp-controller="Clients" asp-action="Details" asp-route-id="@item.Client?.Id">@item.Client?.Name</a>
+            </td>
+            <td>
+                    <a asp-controller="Drivers" asp-action="Details" asp-route-id="@item.Driver?.Id">@item.Driver?.Name</a>
+            </td>
+            <td>
+                    <a asp-action="RemoveLease" asp-route-clientId=@ViewBag.clientId asp-route-id="@item.Id"><button type="button" class="btn btn-danger"><i class="bi bi-trash" data-bs-toggle="tooltip" title="Return Vehicle">Return Vehicle</i></button></a>
+                    <a asp-action="Edit" asp-route-clientId=@ViewBag.clientId asp-route-id="@item.Id"><button type="button" class="btn btn-primary"><i class="bi bi-trash" data-bs-toggle="tooltip" title="Modify Driver">Modify Driver</i></button></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

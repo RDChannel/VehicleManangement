@@ -13,5 +13,6 @@
         public string? PostalCode { get; set; }
         public int? CountryId { get; set; }
         public Country? Country { get; set; }
+        public string? LinkedParentId { get; set; }
     }
 }
